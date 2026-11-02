@@ -1,0 +1,375 @@
+.student-hero-card {
+  background: linear-gradient(135deg, rgba(24, 34, 52, 0.9) 0%, rgba(17, 24, 39, 0.95) 100%);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.student-hero-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0, 245, 155, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.student-profile-summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.student-big-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-full);
+  border: 3px solid var(--neon-green);
+  object-fit: cover;
+  box-shadow: 0 4px 16px rgba(0, 245, 155, 0.3);
+}
+
+.student-greeting {
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+}
+
+.student-meta-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.student-finance-pill {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 240px;
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .student-hero-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .student-finance-pill {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+.finance-due-date {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.weekdays-bar {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+.weekday-btn {
+  flex: 1;
+  min-width: 80px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.weekday-btn:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: var(--bg-surface-elevated);
+}
+
+.weekday-btn.active {
+  background: rgba(0, 245, 155, 0.12);
+  border-color: var(--neon-green);
+  box-shadow: 0 0 16px rgba(0, 245, 155, 0.15);
+}
+
+.weekday-abbr {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-family: 'Outfit', sans-serif;
+}
+
+.weekday-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.weekday-btn.active .weekday-abbr {
+  color: var(--neon-green);
+}
+
+.workout-header-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.workout-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.workout-title {
+  font-size: 1.3rem;
+  color: var(--text-primary);
+}
+
+.workout-progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-surface-elevated);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.workout-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00F59B 0%, #00E5FF 100%);
+  border-radius: var(--radius-full);
+  transition: width 0.4s ease;
+}
+
+.exercise-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.exercise-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.exercise-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: var(--shadow-sm);
+}
+
+.exercise-card.completed {
+  border-color: rgba(0, 245, 155, 0.35);
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(0, 245, 155, 0.04) 100%);
+}
+
+.exercise-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.exercise-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.exercise-muscle-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--neon-cyan);
+  letter-spacing: 0.5px;
+}
+
+.exercise-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.exercise-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+}
+
+.metric-box {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.metric-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.metric-value {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.load-stepper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stepper-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-xs);
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: var(--text-primary);
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepper-btn:hover {
+  background: var(--neon-green);
+  color: #090D16;
+}
+
+.exercise-action-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 12px;
+}
+
+.rest-timer-widget {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 4px 12px 4px 6px;
+}
+
+.timer-ring-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 245, 155, 0.15);
+  color: var(--neon-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+.timer-seconds-display {
+  font-family: 'Outfit', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.timer-start-btn {
+  background: transparent;
+  border: none;
+  color: var(--neon-green);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+}
+
+.timer-start-btn:hover {
+  background: rgba(0, 245, 155, 0.15);
+}
+
+.check-exercise-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.check-exercise-btn:hover {
+  background: rgba(0, 245, 155, 0.1);
+  color: var(--neon-green);
+  border-color: rgba(0, 245, 155, 0.3);
+}
+
+.check-exercise-btn.checked {
+  background: var(--neon-green);
+  color: #090D16;
+  border-color: var(--neon-green);
+}
+
+.rest-day-card {
+  text-align: center;
+  padding: 48px 24px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.rest-day-icon {
+  font-size: 3rem;
+}

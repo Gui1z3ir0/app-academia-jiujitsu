@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Academia & Jiu-Jítsu Pro",
+    "slug": "academia-jiujitsu-pro",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./src/assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#06090F"
+    },
+    "notification": {
+      "icon": "./src/assets/icon.png",
+      "color": "#00F59B"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.fitmanagerpro.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/adaptive-icon.png",
+        "backgroundColor": "#06090F"
+      },
+      "package": "com.fitmanagerpro.app",
+      "permissions": [
+        "VIBRATE",
+        "INTERNET",
+        "RECEIVE_BOOT_COMPLETED"
+      ]
+    },
+    "web": {
+      "favicon": "./src/assets/favicon.png"
+    }
+  }
+}

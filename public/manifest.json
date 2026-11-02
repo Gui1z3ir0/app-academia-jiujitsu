@@ -1,0 +1,37 @@
+{
+  "name": "Academia & Jiu-Jítsu",
+  "short_name": "Academia Pro",
+  "description": "Aplicativo oficial de treinos, Jiu-Jítsu, chat interno, evolução física e gestão de alunos.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090D16",
+  "theme_color": "#090D16",
+  "orientation": "portrait-primary",
+  "id": "/",
+  "categories": ["fitness", "health", "lifestyle"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Meus Treinos",
+      "url": "/#workouts",
+      "description": "Acessar ficha de treinos do dia"
+    },
+    {
+      "name": "Jiu-Jítsu & Faixas",
+      "url": "/#jiujitsu",
+      "description": "Ver graduação e presenças no tatame"
+    },
+    {
+      "name": "Pagar Mensalidade",
+      "url": "/#payments",
+      "description": "Gerar código PIX para mensalidade"
+    }
+  ]
+}
