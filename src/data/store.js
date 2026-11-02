@@ -1241,9 +1241,23 @@ class Store {
       const nextName = exerciseData.name !== undefined ? exerciseData.name : (exerciseData.nome !== undefined ? exerciseData.nome : (current.nome || current.name));
       const nextGroup = exerciseData.muscleGroup !== undefined ? exerciseData.muscleGroup : (exerciseData.grupo_muscular !== undefined ? exerciseData.grupo_muscular : (current.grupo_muscular || current.muscleGroup));
       const nextNotes = exerciseData.notes !== undefined ? exerciseData.notes : (exerciseData.descricao !== undefined ? exerciseData.descricao : (current.descricao || current.notes));
+      let nextLoadKg = current.loadKg;
+      let nextRecordeKg = Number(current.recordeKg || current.loadKg || 0);
+      let nextUltimaCargaEm = current.ultimaCargaEm || null;
+      if (exerciseData.loadKg !== undefined) {
+        const parsed = Number(String(exerciseData.loadKg).replace(',', '.'));
+        if (Number.isFinite(parsed) && parsed >= 0) {
+          nextLoadKg = Number(parsed.toFixed(1));
+          nextRecordeKg = Math.max(nextRecordeKg, nextLoadKg);
+          nextUltimaCargaEm = new Date().toLocaleDateString('pt-BR');
+        }
+      }
       this.state.exercicios[idx] = {
         ...current,
         ...exerciseData,
+        loadKg: nextLoadKg,
+        recordeKg: nextRecordeKg,
+        ultimaCargaEm: nextUltimaCargaEm,
         nome: nextName,
         name: nextName,
         grupo_muscular: nextGroup,

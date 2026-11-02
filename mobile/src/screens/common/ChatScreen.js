@@ -160,4 +160,3 @@ const styles = StyleSheet.create({
   textInput: { flex: 1, backgroundColor: colors.surfaceElevated, color: '#FFF', borderRadius: 12, paddingHorizontal: 14, paddingVertical: 10, fontSize: 13, borderWidth: 1, borderColor: colors.border },
   sendBtn: { width: 42, height: 42, borderRadius: 12, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center' }
 });
-

@@ -181,6 +181,8 @@ create table if not exists public.treino_exercicios (
   series integer not null default 4 check (series > 0),
   repeticoes text not null default '10-12',
   carga_kg numeric(6,2) not null default 0 check (carga_kg >= 0),
+  recorde_carga_kg numeric(6,2) not null default 0 check (recorde_carga_kg >= 0),
+  ultima_carga_em timestamptz,
   descanso_segundos integer not null default 60 check (descanso_segundos >= 0),
   observacoes text,
   concluido boolean not null default false,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '../../theme/colors';
 import Header from '../../components/Header';
@@ -16,6 +16,7 @@ export default function WorkoutScreen({ navigation }) {
   const days = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
   const [selectedDay, setSelectedDay] = useState('Segunda');
   const [workout, setWorkout] = useState({ title: '', exercises: [] });
+  const [customLoads, setCustomLoads] = useState({});
   const [timerVisible, setTimerVisible] = useState(false);
   const [activeTimerSeconds, setActiveTimerSeconds] = useState(60);
 
@@ -26,6 +27,11 @@ export default function WorkoutScreen({ navigation }) {
   const loadWorkout = async () => {
     const data = await dataService.getWorkoutForStudent(currentUser?.id, selectedDay);
     setWorkout(data);
+    const initialInputs = {};
+    (data.exercises || []).forEach(ex => {
+      initialInputs[ex.id] = String(ex.loadKg ?? 0);
+    });
+    setCustomLoads(initialInputs);
   };
 
   const handleToggleExercise = async (exId) => {
@@ -36,9 +42,21 @@ export default function WorkoutScreen({ navigation }) {
   const handleAdjustLoad = async (exId, delta) => {
     const ex = workout.exercises.find(e => e.id === exId);
     if (!ex) return;
-    const newLoad = Math.max(0, ex.loadKg + delta);
+    const newLoad = Math.max(0, Number((Number(ex.loadKg || 0) + delta).toFixed(1)));
     await dataService.updateExerciseLoad(currentUser?.id, selectedDay, exId, newLoad);
     await loadWorkout();
+  };
+
+  const handleSaveCustomLoad = async (exId) => {
+    const rawVal = customLoads[exId];
+    const parsed = Number(String(rawVal || '').replace(',', '.'));
+    if (!Number.isFinite(parsed) || parsed < 0) {
+      Alert.alert('Peso inválido', 'Digite um valor numérico válido em kg (ex: 25 ou 32.5).');
+      return;
+    }
+    await dataService.updateExerciseLoad(currentUser?.id, selectedDay, exId, parsed);
+    await loadWorkout();
+    Alert.alert('Peso Registrado! 💪', `Carga atualizada para ${parsed} kg com sucesso.`);
   };
 
   const openTimer = (seconds) => {
@@ -126,9 +144,14 @@ export default function WorkoutScreen({ navigation }) {
             </View>
 
             <View style={styles.loadControlsRow}>
-              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
                 <Text style={styles.loadLabel}>Carga Atual:</Text>
                 <Text style={styles.loadValue}>{ex.loadKg} kg</Text>
+                {ex.recordeKg ? (
+                  <View style={styles.prBadge}>
+                    <Text style={styles.prBadgeText}>🏆 Recorde: {ex.recordeKg} kg</Text>
+                  </View>
+                ) : null}
               </View>
 
               <View style={styles.loadButtons}>
@@ -146,6 +169,28 @@ export default function WorkoutScreen({ navigation }) {
                   style={styles.loadAdjustBtn}
                 >
                   <Text style={styles.loadAdjustText}>+2kg</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View style={styles.customLoadRow}>
+              <Text style={styles.customLoadLabel}>Peso que peguei no treino (kg):</Text>
+              <View style={styles.customLoadInputGroup}>
+                <TextInput
+                  style={styles.customLoadInput}
+                  keyboardType="numeric"
+                  placeholder="Ex: 30"
+                  placeholderTextColor={colors.textMuted}
+                  value={customLoads[ex.id] !== undefined ? String(customLoads[ex.id]) : String(ex.loadKg || 0)}
+                  onChangeText={(val) => setCustomLoads(prev => ({ ...prev, [ex.id]: val }))}
+                />
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() => handleSaveCustomLoad(ex.id)}
+                  style={styles.saveLoadBtn}
+                >
+                  <Ionicons name="barbell-outline" size={14} color="#000" />
+                  <Text style={styles.saveLoadBtnText}>Salvar Peso</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -328,6 +373,67 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 11,
     fontWeight: '700'
+  },
+  prBadge: {
+    backgroundColor: 'rgba(255, 184, 0, 0.15)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 184, 0, 0.4)',
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 6
+  },
+  prBadgeText: {
+    color: '#FFB800',
+    fontSize: 10,
+    fontWeight: '800'
+  },
+  customLoadRow: {
+    marginTop: 10,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: 'rgba(255, 255, 255, 0.06)',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    gap: 8
+  },
+  customLoadLabel: {
+    color: colors.textSecondary,
+    fontSize: 11,
+    fontWeight: '700'
+  },
+  customLoadInputGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8
+  },
+  customLoadInput: {
+    backgroundColor: colors.surfaceElevated,
+    borderWidth: 1,
+    borderColor: colors.primary,
+    borderRadius: 8,
+    color: '#FFF',
+    fontSize: 13,
+    fontWeight: '800',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    minWidth: 70,
+    textAlign: 'center'
+  },
+  saveLoadBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    backgroundColor: colors.primary,
+    paddingVertical: 7,
+    paddingHorizontal: 12,
+    borderRadius: 8
+  },
+  saveLoadBtnText: {
+    color: '#000',
+    fontSize: 11,
+    fontWeight: '800'
   },
   emptyContainer: {
     alignItems: 'center',

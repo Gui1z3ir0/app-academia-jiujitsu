@@ -295,4 +295,3 @@ const styles = StyleSheet.create({
   turmaSelectRow: { flexDirection: 'row', alignItems: 'center', gap: 10, padding: 10, borderRadius: 10, backgroundColor: colors.surfaceElevated, borderWidth: 1, borderColor: colors.border },
   turmaSelectRowActive: { borderColor: colors.primary, backgroundColor: 'rgba(0,245,155,0.08)' }
 });
-

@@ -183,15 +183,29 @@ export function renderActiveWorkoutOverlay() {
           `).join('')}
         </div>
 
-        <div style="display: flex; justify-content: center; align-items: center; gap: 24px; margin-top: 10px;">
+        <div style="display: flex; justify-content: center; align-items: center; gap: 24px; margin-top: 10px; flex-wrap: wrap;">
           <div>
             <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Meta de Reps</div>
             <div style="font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 800;">${currentEx.reps}</div>
           </div>
           <div style="width: 1px; height: 36px; background: var(--border-subtle);"></div>
           <div>
-            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Carga Utilizada</div>
-            <div style="font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--neon-green);">${currentEx.loadKg} kg</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Peso que peguei (kg)</div>
+            <div style="display: flex; align-items: center; gap: 6px; margin-top: 4px; justify-content: center;">
+              <input
+                type="number"
+                step="0.5"
+                min="0"
+                id="activeWorkoutLoadInput"
+                class="form-input"
+                value="${currentEx.loadKg}"
+                style="width: 86px; text-align: center; font-weight: 800; font-size: 1.1rem; height: 38px; padding: 4px 8px;"
+              />
+              <span style="font-weight: 800; color: var(--neon-green);">kg</span>
+              <button type="button" id="saveActiveWorkoutLoadBtn" class="btn btn-secondary btn-sm" style="height: 38px; padding: 0 12px;">
+                Salvar
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -237,8 +251,24 @@ export function renderActiveWorkoutOverlay() {
 }
 
 function attachActiveWorkoutListeners(currentEx, exercises) {
+  document.getElementById('saveActiveWorkoutLoadBtn')?.addEventListener('click', () => {
+    const loadInput = document.getElementById('activeWorkoutLoadInput');
+    const parsed = Number(String(loadInput?.value ?? '').replace(',', '.'));
+    if (Number.isFinite(parsed) && parsed >= 0) {
+      store.updateExercise(activeWorkoutState.studentId, activeWorkoutState.day, currentEx.id, { loadKg: parsed });
+      currentEx.loadKg = parsed;
+      showToast('success', 'Peso Salvo! 💪', `Carga de ${parsed} kg registrada em ${currentEx.name || currentEx.nome}.`);
+    }
+  });
+
   document.getElementById('completeActiveSetBtn')?.addEventListener('click', () => {
     soundManager.playNotificationPop();
+    const loadInput = document.getElementById('activeWorkoutLoadInput');
+    const typedLoad = Number(String(loadInput?.value ?? '').replace(',', '.'));
+    if (Number.isFinite(typedLoad) && typedLoad >= 0 && typedLoad !== Number(currentEx.loadKg)) {
+      store.updateExercise(activeWorkoutState.studentId, activeWorkoutState.day, currentEx.id, { loadKg: typedLoad });
+      currentEx.loadKg = typedLoad;
+    }
     const repsNumber = parseInt(currentEx.reps, 10) || 10;
     activeWorkoutState.totalKgMoved += (currentEx.loadKg || 20) * repsNumber;
 

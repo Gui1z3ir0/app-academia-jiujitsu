@@ -534,10 +534,18 @@ export const dataService = {
 
   async updateExerciseLoad(studentId, day, exerciseId, newLoadKg) {
     const state = await this.getState();
+    if (!state.workouts[studentId]) {
+      state.workouts[studentId] = JSON.parse(JSON.stringify(initialData.workouts.default_template || {}));
+    }
     if (state.workouts[studentId] && state.workouts[studentId][day]) {
       const ex = state.workouts[studentId][day].exercises.find(e => e.id === exerciseId);
       if (ex) {
-        ex.loadKg = Math.max(0, newLoadKg);
+        const parsed = Number(String(newLoadKg).replace(',', '.'));
+        const validLoad = Number.isFinite(parsed) ? Math.max(0, Number(parsed.toFixed(1))) : ex.loadKg;
+        const prevRecord = Number(ex.recordeKg || ex.loadKg || 0);
+        ex.loadKg = validLoad;
+        ex.recordeKg = Math.max(prevRecord, validLoad);
+        ex.ultimaCargaEm = new Date().toLocaleDateString('pt-BR');
         await this.saveState(state);
         return ex.loadKg;
       }

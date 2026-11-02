@@ -642,6 +642,25 @@ function setupGlobalEventListeners() {
       return;
     }
 
+    const saveStudentLoadBtn = e.target.closest('.save-student-load-btn');
+    if (saveStudentLoadBtn) {
+      const exId = saveStudentLoadBtn.getAttribute('data-ex-id');
+      const day = saveStudentLoadBtn.getAttribute('data-day');
+      const student = store.getActiveStudent();
+      const inputEl = document.getElementById(`studentLoadInput_${exId}`);
+      if (student && inputEl) {
+        const parsed = Number(String(inputEl.value || '').replace(',', '.'));
+        if (Number.isFinite(parsed) && parsed >= 0) {
+          store.updateExercise(student.id, day, exId, { loadKg: parsed });
+          soundManager.playNotificationPop();
+          showToast('success', 'Peso Salvo! 💪', `Você registrou ${parsed} kg neste exercício.`);
+        } else {
+          showToast('warning', 'Peso Inválido', 'Informe um peso válido em kg.');
+        }
+      }
+      return;
+    }
+
     const incBtn = e.target.closest('.inc-load');
     if (incBtn) {
       const exId = incBtn.getAttribute('data-ex-id');
