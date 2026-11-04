@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const STORAGE_PREFIX = '@ct_jefferson_calisto:';
+const STORAGE_PREFIX = '@academia_jiujitsu_pro:';
 
 export const storage = {
   async get(key, defaultValue = null) {
@@ -8,7 +8,6 @@ export const storage = {
       const item = await AsyncStorage.getItem(STORAGE_PREFIX + key);
       return item ? JSON.parse(item) : defaultValue;
     } catch (e) {
-      console.warn('Storage get error:', e);
       return defaultValue;
     }
   },
@@ -18,7 +17,6 @@ export const storage = {
       await AsyncStorage.setItem(STORAGE_PREFIX + key, JSON.stringify(value));
       return true;
     } catch (e) {
-      console.warn('Storage set error:', e);
       return false;
     }
   },
@@ -28,7 +26,6 @@ export const storage = {
       await AsyncStorage.removeItem(STORAGE_PREFIX + key);
       return true;
     } catch (e) {
-      console.warn('Storage remove error:', e);
       return false;
     }
   },
@@ -42,7 +39,6 @@ export const storage = {
       }
       return true;
     } catch (e) {
-      console.warn('Storage clearAll error:', e);
       return false;
     }
   }

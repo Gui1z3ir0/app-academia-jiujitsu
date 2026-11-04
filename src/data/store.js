@@ -486,9 +486,7 @@ class Store {
         if (!Array.isArray(parsed.mensagens_chat)) parsed.mensagens_chat = [];
         return parsed;
       }
-    } catch (e) {
-      console.warn('Erro ao carregar estado local, iniciando base limpa:', e);
-    }
+    } catch (e) {}
     const fresh = JSON.parse(JSON.stringify(initialData));
     this.saveState(fresh);
     return fresh;
@@ -497,9 +495,7 @@ class Store {
   saveState(stateToSave = this.state) {
     try {
       setStorage(STORAGE_KEY, JSON.stringify(stateToSave));
-    } catch (e) {
-      console.error('Falha ao salvar no LocalStorage:', e);
-    }
+    } catch (e) {}
   }
 
   subscribe(listener) {

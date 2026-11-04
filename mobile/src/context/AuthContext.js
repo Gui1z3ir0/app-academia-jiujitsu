@@ -28,7 +28,6 @@ export function AuthProvider({ children }) {
         setCurrentRole(savedRole);
       }
     } catch (e) {
-      console.warn('Erro bootstrapAuth:', e);
     } finally {
       setIsLoading(false);
     }

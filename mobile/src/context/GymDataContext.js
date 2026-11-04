@@ -29,7 +29,6 @@ export function GymDataProvider({ children }) {
       setGymConfig(config);
       setDailyWater(savedWater);
     } catch (e) {
-      console.warn('Erro ao carregar GymData:', e);
     } finally {
       setLoading(false);
     }

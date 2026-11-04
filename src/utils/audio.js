@@ -42,9 +42,7 @@ class SoundManager {
         osc.start(now + index * 0.12);
         osc.stop(now + index * 0.12 + 0.45);
       });
-    } catch (e) {
-      console.warn('Áudio não suportado ou bloqueado pelo navegador:', e);
-    }
+    } catch (e) {}
   }
 
   playNotificationPop() {
