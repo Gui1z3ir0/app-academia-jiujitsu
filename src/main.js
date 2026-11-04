@@ -536,6 +536,14 @@ function setupGlobalEventListeners() {
       return;
     }
 
+    const removeWaterBtn = e.target.closest('#removeWaterBtn');
+    if (removeWaterBtn) {
+      addWater(-250);
+      soundManager.playNotificationPop();
+      renderApp();
+      return;
+    }
+
     const roleBtn = e.target.closest('.role-tab-btn');
     if (roleBtn) {
       if (!store.isPersonal()) {

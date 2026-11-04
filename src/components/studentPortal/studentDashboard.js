@@ -7,7 +7,7 @@ let dailyWaterMl = parseInt(localStorage.getItem('fitmanager_water_ml') || '1750
 const dailyWaterGoalMl = 3000;
 
 export function addWater(amount = 250) {
-  dailyWaterMl = Math.min(dailyWaterMl + amount, 5000);
+  dailyWaterMl = Math.max(0, Math.min(dailyWaterMl + amount, 5000));
   localStorage.setItem('fitmanager_water_ml', String(dailyWaterMl));
 }
 
@@ -163,11 +163,16 @@ export function renderStudentDashboard(studentId) {
             ${Icons.droplet('', 20)}
           </div>
           <div style="flex: 1;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 6px; flex-wrap: wrap;">
               <span class="habit-title">Hidratação</span>
-              <button id="addWaterBtn" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.72rem;">
-                + 250ml
-              </button>
+              <div style="display: flex; gap: 6px; align-items: center;">
+                <button id="removeWaterBtn" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.72rem;" title="Retirar 250ml">
+                  - 250ml
+                </button>
+                <button id="addWaterBtn" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.72rem;" title="Adicionar 250ml">
+                  + 250ml
+                </button>
+              </div>
             </div>
             <div class="habit-value" style="font-size: 1.05rem;">
               ${dailyWaterMl} <span style="font-size: 0.75rem; color: var(--text-muted);">/ ${dailyWaterGoalMl} ml (${waterPct}%)</span>

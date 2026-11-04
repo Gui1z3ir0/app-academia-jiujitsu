@@ -87,7 +87,7 @@ export function GymDataProvider({ children }) {
   }
 
   async function addWater(amountMl = 250) {
-    const newTotal = dailyWater + amountMl;
+    const newTotal = Math.max(0, Math.min(5000, dailyWater + amountMl));
     setDailyWater(newTotal);
     await storage.set('daily_water_ml', newTotal);
     return newTotal;

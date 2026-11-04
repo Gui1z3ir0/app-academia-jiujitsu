@@ -129,14 +129,24 @@ export default function StudentDashboardScreen({ navigation }) {
                 <View style={[styles.progressBarFill, { width: `${waterProgress}%` }]} />
               </View>
             </View>
-            <TouchableOpacity
-              activeOpacity={0.75}
-              onPress={() => addWater(250)}
-              style={styles.addWaterBtn}
-            >
-              <Ionicons name="add" size={18} color={colors.secondary} />
-              <Text style={styles.addWaterBtnText}>+250ml</Text>
-            </TouchableOpacity>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+              <TouchableOpacity
+                activeOpacity={0.75}
+                onPress={() => addWater(-250)}
+                style={styles.removeWaterBtn}
+              >
+                <Ionicons name="remove" size={16} color={colors.textSecondary} />
+                <Text style={styles.removeWaterBtnText}>-250ml</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.75}
+                onPress={() => addWater(250)}
+                style={styles.addWaterBtn}
+              >
+                <Ionicons name="add" size={16} color={colors.secondary} />
+                <Text style={styles.addWaterBtnText}>+250ml</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </Card>
 
@@ -215,8 +225,10 @@ const styles = StyleSheet.create({
   waterValue: { color: '#FFF', fontSize: 18, fontWeight: '800', marginBottom: 6 },
   progressBarBg: { height: 8, backgroundColor: colors.surfaceElevated, borderRadius: 4, overflow: 'hidden' },
   progressBarFill: { height: '100%', backgroundColor: colors.secondary, borderRadius: 4 },
-  addWaterBtn: { flexDirection: 'row', alignItems: 'center', gap: 4, backgroundColor: 'rgba(0, 229, 255, 0.12)', borderWidth: 1, borderColor: colors.secondary, paddingVertical: 10, paddingHorizontal: 14, borderRadius: 12 },
-  addWaterBtnText: { color: colors.secondary, fontSize: 13, fontWeight: '800' },
+  addWaterBtn: { flexDirection: 'row', alignItems: 'center', gap: 4, backgroundColor: 'rgba(0, 229, 255, 0.12)', borderWidth: 1, borderColor: colors.secondary, paddingVertical: 10, paddingHorizontal: 12, borderRadius: 12 },
+  addWaterBtnText: { color: colors.secondary, fontSize: 12, fontWeight: '800' },
+  removeWaterBtn: { flexDirection: 'row', alignItems: 'center', gap: 4, backgroundColor: colors.surfaceElevated, borderWidth: 1, borderColor: colors.border, paddingVertical: 10, paddingHorizontal: 12, borderRadius: 12 },
+  removeWaterBtnText: { color: colors.textSecondary, fontSize: 12, fontWeight: '800' },
   bottomShortcuts: { flexDirection: 'row', gap: 12 },
   halfShortcut: { flex: 1, backgroundColor: colors.surface, borderRadius: 16, borderWidth: 1, borderColor: colors.border, padding: 16, alignItems: 'center' },
   shortcutTitle: { color: '#FFF', fontSize: 13, fontWeight: '800', marginTop: 8 },
