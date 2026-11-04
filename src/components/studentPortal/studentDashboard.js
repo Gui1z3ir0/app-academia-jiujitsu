@@ -122,13 +122,13 @@ export function renderStudentDashboard(studentId) {
         </div>
       </div>
 
-      <div style="background: linear-gradient(135deg, rgba(0, 245, 155, 0.08), rgba(0, 229, 255, 0.04)); border: 1px solid rgba(0, 245, 155, 0.25); border-radius: 16px; padding: 16px 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
-        <div style="display: flex; align-items: center; gap: 14px;">
-          <div style="background: linear-gradient(135deg, #00F59B 0%, #00E5FF 100%); color: #06090F; border-radius: 12px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-weight: 900;">
+      <div class="student-quick-modules-banner" style="background: linear-gradient(135deg, rgba(0, 245, 155, 0.08), rgba(0, 229, 255, 0.04)); border: 1px solid rgba(0, 245, 155, 0.25); border-radius: 16px; padding: 16px 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+        <div style="display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0;">
+          <div style="background: linear-gradient(135deg, #00F59B 0%, #00E5FF 100%); color: #06090F; border-radius: 12px; width: 44px; height: 44px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-weight: 900;">
             💬
           </div>
-          <div>
-            <div style="display: flex; align-items: center; gap: 8px;">
+          <div style="min-width: 0;">
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
               <strong style="font-size: 1rem; color: #fff;">Chat Interno com o Personal</strong>
               <span class="badge badge-success" style="font-size: 0.72rem;">No App</span>
             </div>
@@ -137,11 +137,11 @@ export function renderStudentDashboard(studentId) {
             </div>
           </div>
         </div>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <button class="btn btn-primary btn-sm" data-nav-target="chat" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 800; padding: 10px 16px; border-radius: 10px; cursor: pointer;">
+        <div class="student-quick-modules-actions" style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="btn btn-primary btn-sm" data-nav-target="chat" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-weight: 800; padding: 10px 16px; border-radius: 10px; cursor: pointer;">
             <span>💬 Abrir Chat Interno</span>
           </button>
-          <button class="btn btn-secondary btn-sm" data-nav-target="jiujitsu" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 800; padding: 10px 16px; border-radius: 10px; cursor: pointer;">
+          <button class="btn btn-secondary btn-sm" data-nav-target="jiujitsu" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-weight: 800; padding: 10px 16px; border-radius: 10px; cursor: pointer;">
             <span>🥋 Jiu-Jítsu & Presença</span>
           </button>
         </div>
@@ -158,14 +158,14 @@ export function renderStudentDashboard(studentId) {
           </div>
         </div>
 
-        <div class="habit-card" style="flex: 1.2;">
+        <div class="habit-card habit-card-hydration" style="flex: 1.2;">
           <div class="habit-icon" style="color: #00E5FF; background: rgba(0, 229, 255, 0.12); display: flex; align-items: center; justify-content: center;">
             ${Icons.droplet('', 20)}
           </div>
-          <div style="flex: 1;">
+          <div style="flex: 1; min-width: 0;">
             <div style="display: flex; justify-content: space-between; align-items: center; gap: 6px; flex-wrap: wrap;">
               <span class="habit-title">Hidratação</span>
-              <div style="display: flex; gap: 6px; align-items: center;">
+              <div class="hydration-btn-group" style="display: flex; gap: 6px; align-items: center;">
                 <button id="removeWaterBtn" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.72rem;" title="Retirar 250ml">
                   - 250ml
                 </button>

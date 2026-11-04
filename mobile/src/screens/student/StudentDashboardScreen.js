@@ -123,7 +123,7 @@ export default function StudentDashboardScreen({ navigation }) {
           </View>
 
           <View style={styles.waterRow}>
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, minWidth: 140 }}>
               <Text style={styles.waterValue}>{dailyWater} <Text style={{ fontSize: 13, color: colors.textSecondary }}>/ {waterGoal} ml</Text></Text>
               <View style={styles.progressBarBg}>
                 <View style={[styles.progressBarFill, { width: `${waterProgress}%` }]} />
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
   measureDivider: { width: 1, height: 30, backgroundColor: colors.border },
   waterCard: { marginBottom: 14 },
   waterPercentage: { color: colors.secondary, fontSize: 12, fontWeight: '800' },
-  waterRow: { flexDirection: 'row', alignItems: 'center', gap: 16 },
+  waterRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 },
   waterValue: { color: '#FFF', fontSize: 18, fontWeight: '800', marginBottom: 6 },
   progressBarBg: { height: 8, backgroundColor: colors.surfaceElevated, borderRadius: 4, overflow: 'hidden' },
   progressBarFill: { height: '100%', backgroundColor: colors.secondary, borderRadius: 4 },

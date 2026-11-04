@@ -223,10 +223,10 @@ export function renderJiuJitsuView() {
         ` : `
           <div style="display: flex; flex-direction: column; gap: 14px;">
             ${students.map(s => `
-              <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-                <div style="display: flex; align-items: center; gap: 14px; min-width: 240px;">
-                  <img src="${s.avatar}" style="width: 44px; height: 44px; border-radius: 50%;" alt="">
-                  <div>
+              <div class="jj-graduation-student-row" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                <div style="display: flex; align-items: center; gap: 14px; min-width: 200px;">
+                  <img src="${s.avatar}" style="width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;" alt="">
+                  <div style="min-width: 0;">
                     <strong style="font-size: 1rem; color: #fff; display: block;">${s.name}</strong>
                     <span style="font-size: 0.78rem; color: var(--jet-emerald); font-weight: 700;">
                       ${s.aulasJiuJitsu || 0} / ${s.metaAulasGraduacao || 40} aulas concluídas
@@ -234,11 +234,11 @@ export function renderJiuJitsuView() {
                   </div>
                 </div>
 
-                <div style="flex: 1; min-width: 240px;">
+                <div style="flex: 1; min-width: 220px;">
                   ${renderBeltVisual(s.faixaJiuJitsu, s.grausJiuJitsu)}
                 </div>
 
-                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <div class="jj-graduation-controls" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                   <select class="form-select jj-belt-select" data-student-id="${s.id}" style="width: 130px; padding: 6px 10px; font-size: 0.85rem;">
                     ${['Branca', 'Azul', 'Roxa', 'Marrom', 'Preta'].map(f => `
                       <option value="${f}" ${s.faixaJiuJitsu === f ? 'selected' : ''}>Faixa ${f}</option>

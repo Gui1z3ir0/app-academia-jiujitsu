@@ -53,11 +53,11 @@ export function renderChatView() {
         ` : ''}
       </div>
 
-      <div class="glass-panel" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; height: 520px;">
-        <div style="padding: 16px 20px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.25);">
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <img src="${isPersonal ? currentStudent.avatar : activePersonal.avatar}" style="width: 40px; height: 40px; border-radius: 50%;" alt="">
-            <div>
+      <div class="glass-panel inapp-chat-panel" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; height: 520px;">
+        <div class="inapp-chat-header" style="padding: 16px 20px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; background: rgba(0,0,0,0.25);">
+          <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
+            <img src="${isPersonal ? currentStudent.avatar : activePersonal.avatar}" style="width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;" alt="">
+            <div style="min-width: 0;">
               <strong style="color: #fff; font-size: 0.96rem; display: block;">
                 ${isPersonal ? currentStudent.name : activePersonal.name}
               </strong>

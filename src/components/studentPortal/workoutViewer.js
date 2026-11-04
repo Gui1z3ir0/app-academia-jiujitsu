@@ -144,13 +144,13 @@ export function renderWorkoutViewer(studentId) {
                     </div>
                   </div>
 
-                  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 10px; padding: 10px 12px; background: rgba(0, 245, 155, 0.06); border: 1px solid rgba(0, 245, 155, 0.2); border-radius: 10px;">
+                  <div class="student-custom-load-bar" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 10px; padding: 10px 12px; background: rgba(0, 245, 155, 0.06); border: 1px solid rgba(0, 245, 155, 0.2); border-radius: 10px;">
                     <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                       <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-secondary);">🏋️ Peso que peguei no treino:</span>
                       ${ex.recordeKg ? `<span class="badge badge-warning" style="font-size: 0.72rem;">🏆 Recorde: ${ex.recordeKg} kg</span>` : ''}
                       ${ex.ultimaCargaEm ? `<span style="font-size: 0.72rem; color: var(--text-muted);">Atualizado em ${ex.ultimaCargaEm}</span>` : ''}
                     </div>
-                    <div style="display: flex; align-items: center; gap: 6px;">
+                    <div class="student-custom-load-controls" style="display: flex; align-items: center; gap: 6px;">
                       <input
                         type="number"
                         step="0.5"
@@ -161,7 +161,7 @@ export function renderWorkoutViewer(studentId) {
                         data-day="${selectedDay}"
                         value="${ex.loadKg}"
                         placeholder="Kg"
-                        style="width: 82px; padding: 6px 10px; font-weight: 800; text-align: center; height: 34px;"
+                        style="width: 82px; padding: 6px 10px; font-weight: 800; text-align: center; height: 36px;"
                       />
                       <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-secondary);">kg</span>
                       <button
@@ -169,7 +169,7 @@ export function renderWorkoutViewer(studentId) {
                         class="btn btn-primary btn-sm save-student-load-btn"
                         data-ex-id="${ex.id}"
                         data-day="${selectedDay}"
-                        style="padding: 6px 12px; height: 34px; font-size: 0.78rem;"
+                        style="padding: 6px 12px; height: 36px; font-size: 0.78rem;"
                       >
                         Salvar Peso
                       </button>
