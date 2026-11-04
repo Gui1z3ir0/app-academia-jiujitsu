@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fitmanager-pro-cache-v2';
+const CACHE_NAME = 'academia-jiujitsu-cache-v3';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
